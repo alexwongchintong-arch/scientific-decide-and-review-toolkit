@@ -15,6 +15,13 @@
 | [辅助决策工具箱](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E8%BE%85%E5%8A%A9%E5%86%B3%E7%AD%96%E5%B7%A5%E5%85%B7%E7%AE%B1/) | [`工具箱/辅助决策工具箱/index.html`](工具箱/辅助决策工具箱/index.html) | 将六步决策、内外视角、决策配速、事前验尸四个模块组合成一条决策前的完整向导，支持多轮事前验尸与报告归档 |
 | [决策复盘工具箱](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/) | [`工具箱/决策复盘工具箱/index.html`](工具箱/决策复盘工具箱/index.html) | 将幸运箱、知识跟踪器、反事实检验等整合为"四阶段完整复盘"流程，可读取独立工具沉淀的基准库数据 |
 
+**界面预览**（点击图片即可在线试用）：
+
+| 辅助决策工具箱 | 决策复盘工具箱 |
+| :---: | :---: |
+| [![辅助决策工具箱界面截图](assets/toolbox-decide.png)](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E8%BE%85%E5%8A%A9%E5%86%B3%E7%AD%96%E5%B7%A5%E5%85%B7%E7%AE%B1/) | [![决策复盘工具箱界面截图](assets/toolbox-review.png)](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/) |
+| [在线试用 →](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E8%BE%85%E5%8A%A9%E5%86%B3%E7%AD%96%E5%B7%A5%E5%85%B7%E7%AE%B1/) | [在线试用 →](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/) |
+
 ### 独立工具（按书中章节顺序）
 
 | 章节 | 工具 | 文件 | 说明 |
@@ -78,6 +85,9 @@ scientific-decide-and-review-toolkit/
 ├── 工具箱/                 # 组合向导
 │   ├── 辅助决策工具箱/index.html
 │   └── 决策复盘工具箱/index.html
+├── assets/                 # 界面截图（README 与落地页引用）
+│   ├── toolbox-decide.png
+│   └── toolbox-review.png
 └── 开发模板/               # 贡献者资源
     ├── tool-engine.template.txt  # 新工具开发模板（统一样式与交互规范）
     └── demo.html                 # 模板使用示例

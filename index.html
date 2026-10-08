@@ -29,6 +29,17 @@
   .card .ch { font-size: 12px; color: #b5a98c; font-weight: 600; }
   .card .name { font-size: 16px; font-weight: 600; margin: 4px 0 6px; }
   .card .desc { font-size: 13px; color: #8a857c; }
+  .toolbox-grid { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+  .toolbox-card { padding: 0 !important; overflow: hidden; }
+  .toolbox-card .shot-link { display: block; border-bottom: 1px solid #e6e2d8; }
+  .toolbox-card .shot { display: block; width: 100%; height: auto; }
+  .toolbox-card .toolbox-body { padding: 14px 18px 16px; }
+  .try-btn {
+    display: inline-block; margin-top: 10px; padding: 6px 16px;
+    background: #2f6bd8; color: #fff !important; border-radius: 6px;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+  }
+  .try-btn:hover { background: #2458b5; }
   footer { text-align: center; margin-top: 48px; font-size: 12px; color: #b3aea2; }
   footer a { color: #8a857c; }
 </style>
@@ -37,19 +48,31 @@
 <div class="wrap">
   <header>
     <h1>Scientific Decide and Review Toolkit</h1>
-    <p>科学决策与复盘工具箱 · 基于安妮·杜克《对赌·实践版》（How to Decide: Simple Tools for Making Better Choices）各章方法论 · 数据仅存本地浏览器 · MIT 开源</p>
+    <p>科学决策与复盘工具箱 · 基于安妮·杜克《对赌·实践版》（How to Decide: Simple Tools for Making Better Choices）各章方法论 · 数据仅存本地浏览器 · MIT 开源 · 点击卡片即可在线使用</p>
   </header>
 
   <h2>组合工具箱（推荐使用）</h2>
-  <div class="grid">
-    <a class="card" href="工具箱/辅助决策工具箱/index.html">
-      <div class="ch">四合一 · 决策前</div><div class="name">辅助决策工具箱</div>
-      <div class="desc">六步决策 + 内外视角 + 决策配速 + 事前验尸的完整决策向导</div>
-    </a>
-    <a class="card" href="工具箱/决策复盘工具箱/index.html">
-      <div class="ch">四阶段 · 决策后</div><div class="name">决策复盘工具箱</div>
-      <div class="desc">幸运箱 + 知识跟踪 + 反事实检验的完整复盘流程</div>
-    </a>
+  <div class="grid toolbox-grid">
+    <div class="card toolbox-card">
+      <a href="工具箱/辅助决策工具箱/index.html" class="shot-link">
+        <img class="shot" src="assets/toolbox-decide.png" alt="辅助决策工具箱界面截图" loading="lazy">
+      </a>
+      <div class="toolbox-body">
+        <div class="ch">四合一 · 决策前</div><div class="name">辅助决策工具箱</div>
+        <div class="desc">六步决策 + 内外视角 + 决策配速 + 事前验尸的完整决策向导</div>
+        <a class="try-btn" href="工具箱/辅助决策工具箱/index.html">在线试用 →</a>
+      </div>
+    </div>
+    <div class="card toolbox-card">
+      <a href="工具箱/决策复盘工具箱/index.html" class="shot-link">
+        <img class="shot" src="assets/toolbox-review.png" alt="决策复盘工具箱界面截图" loading="lazy">
+      </a>
+      <div class="toolbox-body">
+        <div class="ch">四阶段 · 决策后</div><div class="name">决策复盘工具箱</div>
+        <div class="desc">幸运箱 + 知识跟踪 + 反事实检验的完整复盘流程</div>
+        <a class="try-btn" href="工具箱/决策复盘工具箱/index.html">在线试用 →</a>
+      </div>
+    </div>
   </div>
 
   <h2>通用工具（决策与复盘均可使用）</h2>
