@@ -30,10 +30,29 @@
   .card .name { font-size: 16px; font-weight: 600; margin: 4px 0 6px; }
   .card .desc { font-size: 13px; color: #8a857c; }
   .toolbox-grid { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
-  .toolbox-card { padding: 0 !important; overflow: hidden; }
-  .toolbox-card .shot-link { display: block; border-bottom: 1px solid #e6e2d8; }
+  .toolbox-card {
+    padding: 0 !important; overflow: hidden;
+    background: #fff; border: 1px solid #e6e2d8; border-radius: 10px;
+  }
+  .toolbox-card .shot-link { display: block; border-bottom: 1px solid #e6e2d8; background: #f7f6f2; }
   .toolbox-card .shot { display: block; width: 100%; height: auto; }
   .toolbox-card .toolbox-body { padding: 14px 18px 16px; }
+  .toolbox-card.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.08fr .92fr; }
+  .toolbox-card.featured .shot-link { border-bottom: none; border-right: 1px solid #e6e2d8; }
+  .toolbox-card.featured .shot { height: 100%; object-fit: cover; object-position: top center; }
+  .toolbox-card.featured .toolbox-body { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 22px 26px; }
+  .toolbox-card.featured .name { font-size: 20px; margin: 6px 0 8px; }
+  .toolbox-card.featured .desc { line-height: 1.65; }
+  .feature-list { list-style: none; margin: 10px 0 2px; padding: 0; }
+  .feature-list li { position: relative; padding-left: 14px; margin-top: 5px; font-size: 12.5px; color: #6f6a61; }
+  .feature-list li::before { content: "·"; position: absolute; left: 2px; color: #2f6bd8; font-weight: 700; }
+  .new-badge { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; background: #eaf2df; color: #5b7a3a; font-size: 10px; font-weight: 700; vertical-align: 2px; letter-spacing: .5px; }
+  .section-note { font-size: 12.5px; color: #8a857c; margin: -4px 0 12px; }
+  @media (max-width: 760px) {
+    .toolbox-grid { grid-template-columns: 1fr; }
+    .toolbox-card.featured { display: block; }
+    .toolbox-card.featured .shot-link { border-right: none; border-bottom: 1px solid #e6e2d8; }
+  }
   .try-btn {
     display: inline-block; margin-top: 10px; padding: 6px 16px;
     background: #2f6bd8; color: #fff !important; border-radius: 6px;
@@ -52,7 +71,24 @@
   </header>
 
   <h2>组合工具箱（推荐使用）</h2>
+  <p class="section-note">三条路线：只想做决策 →「辅助决策工具箱」；只想复盘 →「决策复盘工具箱」；想从决策一路走到复盘 →「决策-复盘工具箱」。</p>
   <div class="grid toolbox-grid">
+    <div class="card toolbox-card featured">
+      <a href="工具箱/决策-复盘工具箱/index.html" class="shot-link">
+        <img class="shot" src="assets/toolbox-flow.png" alt="决策-复盘工具箱界面截图" loading="lazy">
+      </a>
+      <div class="toolbox-body">
+        <div class="ch">全流程 · 决策 + 复盘<span class="new-badge">NEW</span></div>
+        <div class="name">决策-复盘工具箱</div>
+        <div class="desc">把同一个决策的两头接在一起：决策前按需组合四种辅助手段，结果出来后用四阶段完整复盘，分清运气与决策质量。</div>
+        <ul class="feature-list">
+          <li>两个阶段共用同一份事实，决策信息自动带入复盘</li>
+          <li>一份记录从「该不该做」走到「做完学到了什么」</li>
+          <li>支持中途存档、随时继续、一键导出报告</li>
+        </ul>
+        <a class="try-btn" href="工具箱/决策-复盘工具箱/index.html">在线试用 →</a>
+      </div>
+    </div>
     <div class="card toolbox-card">
       <a href="工具箱/辅助决策工具箱/index.html" class="shot-link">
         <img class="shot" src="assets/toolbox-decide.png" alt="辅助决策工具箱界面截图" loading="lazy">

@@ -1,21 +1,30 @@
 # Scientific Decide and Review Toolkit（科学决策与复盘工具箱）
 
-一套基于安妮·杜克《对赌·实践版》（*How to Decide: Simple Tools for Making Better Choices*）各章方法论制作的**纯前端决策工具集**。按照"决策前 → 决策中 → 决策后复盘"的完整链路，覆盖书中第一章到第八章的核心练习方法。
+一套基于安妮·杜克《对赌·实践版》（*How to Decide: Simple Tools for Making Better Choices*）各章方法论制作的**纯前端决策工具集**，包含 **7 个独立工具 + 3 个组合工具箱**。按照“决策前 → 决策中 → 决策后复盘”的完整链路，覆盖书中第一章到第八章的核心练习方法。
 
 - **零依赖、零构建**：每个工具都是一个独立的单文件 HTML，双击即可在浏览器中使用，离线可用。
 - **数据完全本地**：所有填写内容只保存在你自己浏览器的 `localStorage` 中，没有任何网络请求、没有追踪、没有服务器。
 - **完全开放**：MIT 协议，欢迎任何形式的二次开发、迭代和再分发。
 
+> **新增 · 决策-复盘工具箱**：把「辅助决策」与「决策复盘」串成一条完整链路——决策阶段填过的名称、决策清单、已知信息、内外视角会自动带入复盘，一份记录从「该不该做」走到「做完学到了什么」。
+
 ## 工具清单
 
 ### 组合工具箱（推荐使用）
 
+三条路线：只想做决策 →「辅助决策工具箱」；只想复盘 →「决策复盘工具箱」；想从决策一路走到复盘 →「决策-复盘工具箱」。
+
 | 工具箱 | 文件 | 说明 |
 | --- | --- | --- |
+| [决策-复盘工具箱（全流程 · 新增）](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96-%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/) | [`工具箱/决策-复盘工具箱/index.html`](工具箱/决策-复盘工具箱/index.html) | **决策 + 复盘一体化**：决策前按需组合决策速度、六步决策、内外视角、事前验尸；结果出来后接四阶段完整复盘。两个阶段共用同一份事实并自动同步，支持中途存档、继续走和报告导出 |
 | [辅助决策工具箱](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E8%BE%85%E5%8A%A9%E5%86%B3%E7%AD%96%E5%B7%A5%E5%85%B7%E7%AE%B1/) | [`工具箱/辅助决策工具箱/index.html`](工具箱/辅助决策工具箱/index.html) | 将六步决策、内外视角、决策配速、事前验尸四个模块组合成一条决策前的完整向导，支持多轮事前验尸与报告归档 |
 | [决策复盘工具箱](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/) | [`工具箱/决策复盘工具箱/index.html`](工具箱/决策复盘工具箱/index.html) | 将幸运箱、知识跟踪器、反事实检验等整合为"四阶段完整复盘"流程，可读取独立工具沉淀的基准库数据 |
 
 **界面预览**（点击图片即可在线试用）：
+
+[![决策-复盘工具箱界面截图](assets/toolbox-flow.png)](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96-%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/)
+
+**决策-复盘工具箱（全流程 · 新增）** · [在线试用 →](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96-%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/)
 
 | 辅助决策工具箱 | 决策复盘工具箱 |
 | :---: | :---: |
@@ -50,6 +59,7 @@ git clone https://github.com/alexwongchintong-arch/scientific-decide-and-review-
 
 - 落地页（工具导航）：[https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/)
 - 每个工具都可以单独打开，例如：
+  - [决策-复盘工具箱（全流程）](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96-%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/)
   - [辅助决策工具箱](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E8%BE%85%E5%8A%A9%E5%86%B3%E7%AD%96%E5%B7%A5%E5%85%B7%E7%AE%B1/)
   - [决策复盘工具箱](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E5%B7%A5%E5%85%B7%E7%AE%B1/%E5%86%B3%E7%AD%96%E5%A4%8D%E7%9B%98%E5%B7%A5%E5%85%B7%E7%AE%B1/)
   - [六步决策向导](https://alexwongchintong-arch.github.io/scientific-decide-and-review-toolkit/%E8%BE%85%E5%8A%A9%E5%86%B3%E7%AD%96/six-step.html)
@@ -63,10 +73,12 @@ git clone https://github.com/alexwongchintong-arch/scientific-decide-and-review-
 
 - 所有数据仅存储于浏览器的 `localStorage`，主要键名包括：
   - 独立工具：`pv_baseline`（判断基准库）、`luckbox_myex`（幸运箱案例）、`kt_examples`（知识跟踪案例）等；
-  - 工具箱：`ad_reports` / `ad_draft`（辅助决策工具箱报告与草稿）及各复盘工具的报告键。
+  - 辅助决策/决策复盘工具箱：`ad_reports` / `ad_draft` 及各复盘工具的报告键；
+  - 决策-复盘工具箱：`dfr_drafts`（进行中的记录）、`dfr_reports`（已完成报告）、`dfr_baseline`（两阶段共用的个人基准库）、`dfr_migrated2`（旧工具导入标记）。
 - 清除数据：在浏览器中清除对应站点的站点数据（或开发者工具 → Application → Local Storage → 删除对应键）即可彻底删除全部记录。
-- 仓库中的 HTML 文件**不包含任何用户数据**，可安全地 Fork、分发。
-- 跨工具联动：两个工具箱会实时读取独立工具的基准库键，实现"一次沉淀、多处复用"。
+- 仓库中的 HTML 文件**不包含任何用户数据**，可安全地 Fork、分发。没有 CDN、字体、统计脚本或任何外链请求。
+- 跨工具联动：辅助决策工具箱 / 决策复盘工具箱会实时读取独立工具的基准库键；决策-复盘工具箱首次打开时会把旧工具箱和四个单文件工具的报告**只读复制**到自己的 `dfr_` 键（旧数据不受影响，之后两边互不干扰），实现“一次沉淀、多处复用”。
+- **脱敏声明**：仓库自带的所有 HTML 都是空初始状态，不含示例报告、草稿、姓名、联系方式、本地路径或任何真实决策记录；README / 落地页中的界面截图均在全新浏览器配置、空 `localStorage` 下生成。贡献者提交前请用虚构数据演示并清空本地记录。
 
 ## 目录结构
 
@@ -83,9 +95,11 @@ scientific-decide-and-review-toolkit/
 │   ├── knowledge-tracker.html
 │   └── counterfactual.html
 ├── 工具箱/                 # 组合向导
+│   ├── 决策-复盘工具箱/index.html   # 决策 → 复盘全流程（新增）
 │   ├── 辅助决策工具箱/index.html
 │   └── 决策复盘工具箱/index.html
 ├── assets/                 # 界面截图（README 与落地页引用）
+│   ├── toolbox-flow.png    # 决策-复盘工具箱
 │   ├── toolbox-decide.png
 │   └── toolbox-review.png
 └── 开发模板/               # 贡献者资源
@@ -105,7 +119,7 @@ scientific-decide-and-review-toolkit/
 
 1. 保持**单文件 HTML、零外部依赖**的原则，不引入 CDN 或构建步骤；
 2. 用户数据只允许存 `localStorage`，**不得**加入任何上报、统计或外链请求；
-3. 提交前确认文件中没有写入任何个人真实记录。
+3. 提交前确认文件中没有写入任何个人真实记录；演示与截图请使用虚构示例，并确认浏览器 `localStorage` 为空或已脱敏。
 
 ## 许可与声明
 
