@@ -35,7 +35,7 @@
   }
 
   .container { max-width: none; margin: 0 auto; padding: 24px 32px 80px; }
-  .narrow { max-width: 1080px; margin-left: auto; margin-right: auto; }
+  .narrow { max-width: 1280px; margin-left: auto; margin-right: auto; }
 
   .hero, .report-list {
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
@@ -54,6 +54,35 @@
   .flow-card .fc-src { font-size: 11px; color: var(--accent); margin-bottom: 4px; }
   .flow-card .fc-desc { font-size: 12px; color: var(--text-secondary); }
 
+  /* 首页两个入口：两个带框区块并排，框内各自 2×2 田字；
+     subgrid 让两框共享父网格行轨道——8 张卡跨框等高等宽 */
+  .entry-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto minmax(0, 1fr) minmax(0, 1fr);
+                gap: 12px; margin: 16px 0 4px; }
+  .entry-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: subgrid;
+               gap: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+               background: #fcfbfa; padding: 14px 16px 16px; }
+  .entry-col.dec { grid-area: 1 / 1 / 4 / 3; }
+  .entry-col.rev { grid-area: 1 / 3 / 4 / 5; }
+  .entry-col .ec-head { grid-column: 1 / -1; }
+  .entry-col .ec-head h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .entry-col .ec-desc { font-size: 12.5px; color: var(--text-secondary); }
+
+  /* 首页两区（进行中 / 已完成）横置并排，窄屏回退上下堆叠 */
+  .lists-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; }
+
+  /* 进行中记录的来源色条：决策来源（蓝）/ 复盘来源（青） */
+  .report-item.src-dec { border-left: 3px solid var(--accent); padding-left: 12px; }
+  .report-item.src-rv { border-left: 3px solid #0e7490; padding-left: 12px; }
+
+  /* 报告页头部：决策 / 复盘进度左右并列 */
+  .rep-prog { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+  .rp-col { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; background: #fcfbfa; }
+  .rp-col h4 { font-size: 13px; margin-bottom: 8px; }
+  .rp-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-secondary); padding: 3px 0; flex-wrap: wrap; }
+  .rp-row .pdot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .rp-row .rp-num { color: var(--text-muted); margin-left: auto; }
+  .rp-row .rp-vd { flex-basis: 100%; color: var(--text-muted); }
+
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 10px 20px; border: none; border-radius: var(--radius-sm);
@@ -63,8 +92,8 @@
   .btn:hover { background: #1646b0; }
   .btn.secondary { background: var(--surface); color: var(--text-secondary); border: 1px solid var(--border); }
   .btn.secondary:hover { background: #f0efec; }
-  .btn.danger-ghost { background: transparent; color: var(--danger); border: 1px solid transparent; font-weight: 500; padding: 6px 12px; }
-  .btn.danger-ghost:hover { background: #fbeaea; }
+  .btn.danger-ghost { background: transparent; color: var(--danger); border: 1px solid #e5b8b8; font-weight: 500; padding: 6px 12px; }
+  .btn.danger-ghost:hover { background: #fbeaea; border-color: var(--danger); }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
   .report-item { display: flex; align-items: center; justify-content: space-between; gap: 12px;
@@ -75,6 +104,10 @@
   .report-item .ri-meta { font-size: 12px; color: var(--text-muted); margin-top: 3px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .ri-tag { display: inline-block; font-size: 11px; font-weight: 600; border-radius: 999px; padding: 1px 8px; color: #fff; }
   .empty-hint { font-size: 13px; color: var(--text-muted); }
+
+  /* 首页：流式全宽（左右留白交给 .container 的 padding），条目在半栏内整行拉满 */
+  .home-full { width: 100%; }
+  .ri-grid { display: block; }
 
   /* 两层步骤条：上层模块阶段条，下层当前模块内步骤胶囊 */
   .phase-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
@@ -123,6 +156,11 @@
               font-weight: 600; padding: 4px 12px; border-radius: 999px; cursor: pointer; }
   .btn-edit:hover { border-color: var(--accent); }
   .btn-edit.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  /* 危险操作（放弃草稿 / 放弃编辑 / 删除报告等）：常态实心红，hover 更深 */
+  .btn-edit.danger { color: #fff; background: var(--danger); border-color: var(--danger); }
+  .btn-edit.danger:hover { background: #9e2222; border-color: #9e2222; }
+  .btn.danger { background: var(--danger); color: #fff; }
+  .btn.danger:hover { background: #9e2222; }
   .rv-nav { display: flex; align-items: center; gap: 8px; min-width: 0; }
   .rv-nav h3 { font-size: 13px; font-weight: 700; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .rv-arrow { border: 1px solid var(--border); background: #fff; color: var(--text-secondary); font-size: 14px; line-height: 1; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; flex-shrink: 0; }
@@ -364,8 +402,9 @@
   .nav-note { font-size: 12px; color: var(--text-muted); }
 
   /* ---------- 组合报告 ---------- */
+  /* 报告页用满屏幕宽度：正文区不再限宽，小节卡片网格控制单块可读宽度 */
   .report-head { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-                 padding: 28px 32px; box-shadow: var(--shadow); margin-bottom: 18px; max-width: 1080px; }
+                 padding: 28px 32px; box-shadow: var(--shadow); margin-bottom: 18px; }
   .report-head h1 { font-size: 21px; margin-bottom: 6px; }
   .report-head .meta { font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px; }
   .vb-row { display: flex; flex-direction: column; gap: 8px; }
@@ -379,11 +418,11 @@
   .lesson-banner { margin-top: 14px; background: #fffbeb; border: 1px solid #f2e3b3; border-radius: var(--radius-sm);
                    padding: 12px 16px; font-size: 14px; }
   .lesson-banner .lb-label { font-size: 11px; font-weight: 700; color: #a07d1c; display: block; margin-bottom: 3px; }
-  .report-phase { max-width: 1080px; margin: 24px 0 12px; font-size: 15px; font-weight: 700;
+  .report-phase { margin: 24px 0 12px; font-size: 15px; font-weight: 700;
                   display: flex; align-items: center; gap: 8px; }
   .report-phase .pdot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
   .report-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-                    padding: 22px 28px; box-shadow: var(--shadow); margin-bottom: 16px; max-width: 1080px; }
+                    padding: 22px 28px; box-shadow: var(--shadow); margin-bottom: 16px; }
   .report-section h3 { font-size: 14px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
   .report-section h3 .sn { width: 20px; height: 20px; border-radius: 50%; background: var(--accent-soft); color: var(--accent);
                            font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
@@ -409,6 +448,15 @@
     .half-row { flex-direction: column; gap: 0; }
     .half-row .field.half { margin-bottom: 26px; }
     .flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* 首页：入口两框回退上下堆叠（框内 2 列卡），两区回退上下堆叠，进度块单列 */
+    .entry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
+    .entry-col.dec, .entry-col.rev { grid-area: auto; grid-template-rows: none; }
+    .lists-cols { grid-template-columns: 1fr; }
+    .rep-prog { grid-template-columns: 1fr; }
+  }
+  /* 报告页小节网格：中等宽度回退单列 */
+  @media (max-width: 1100px) {
+    .report-flow { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
     .container { padding: 20px 14px 60px; }
@@ -419,14 +467,31 @@
     .tri-sub { flex-direction: column; gap: 6px; }
     .mp-grid { grid-template-columns: 1fr; }
     .flow-grid { grid-template-columns: 1fr; }
+    .entry-grid { grid-template-columns: 1fr; }
+    .entry-col { grid-template-columns: 1fr; }
     /* 报告条目：窄屏时标题独占一行，操作按钮换到下一行，避免标题被挤成细条 */
     .report-item { flex-wrap: wrap; align-items: flex-start; }
     .report-item .ri-main { flex: 1 1 100%; }
   }
   @media print {
     body { background: #fff; }
-    .actions-row, .no-print { display: none !important; }
-    .report-head, .report-section { box-shadow: none; break-inside: avoid; }
+    /* 隐藏一切按钮与交互/导航件，只留内容 */
+    .actions-row, .no-print, .btn, .btn-edit, .edit-bar, .phase-bar, .stepper,
+    .aux-tabs, .dec-bar, .rv-jump, .list-foot, .rv-arrow, .row-remove, .list-add { display: none !important; }
+    /* 分章分页：阶段/章标题另起一页并避免与下文断开，小节卡片不跨页 */
+    .report-head { box-shadow: none; border: none; padding-left: 0; padding-right: 0; }
+    .report-phase { break-before: page; break-after: avoid; }
+    .report-head + .report-phase { break-before: auto; }
+    .report-section, .report-step, .base-section, .lesson-banner { box-shadow: none; break-inside: avoid; }
+    /* 网格在打印下回退单列（!important 压过后面才定义的基础网格样式） */
+    .report-flow { display: block !important; }
+    .report-flow .report-step { margin-bottom: 14px; }
+    /* 黑白友好：彩色标签/横幅转为描边样式 */
+    .ri-tag, .verdict-banner, .eval-tag, .pdot { background: none !important; }
+    .ri-tag, .verdict-banner, .eval-tag { color: #000 !important; border: 1px solid #666 !important; }
+    .lesson-banner { border: 1px solid #999; background: none; }
+    .step-card { box-shadow: none; border: 1px solid var(--border); }
+    .report-flow { max-width: none; }
   }
 
   /* ===================================================================== */
@@ -623,7 +688,7 @@
 .pair-cap { font-size: 11.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; }
 .pair-arrow { display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 18px; padding-top: 18px; }
 .kt-syncnote { font-size: 11.5px; color: var(--text-muted); margin-bottom: 6px; }
-/* ---------- 个人基准库 ---------- */
+/* ---------- 基准库 ---------- */
   .base-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
                   padding: 24px 28px; box-shadow: var(--shadow); margin-bottom: 18px; }
 .base-section h2 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
@@ -699,11 +764,6 @@
   .pair-arrow { transform: rotate(90deg); padding: 0; justify-content: flex-start; }
 }
 
-  @media print {
-  .report-head, .report-step, .base-section { box-shadow: none; break-inside: avoid; }
-  .report-flow { grid-template-columns: 1fr; }
-}
-
   /* ---------- 全流程新增：两阶段阶段条 / 同步提示 ---------- */
   .pg-label { font-size: 11.5px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.04em; }
   .pg-label:not(:first-child) { margin-left: 10px; }
@@ -715,16 +775,19 @@
   .sync-note .sn-txt b { font-weight: 700; }
   .sync-note .btn-edit { flex: 0 0 auto; margin-left: auto; background: #fff; color: #0e7490; border-color: #9ec9d4; }
   .sync-note .btn-edit:hover { border-color: #0e7490; }
-  .report-flow { max-width: 1080px; }
   .list-note { font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.7; }
-  .list-foot { display: flex; align-items: flex-start; gap: 14px; justify-content: space-between;
+  .list-foot { display: flex; align-items: flex-start; gap: 14px; justify-content: space-between; flex-wrap: wrap;
                margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--border);
                font-size: 12.5px; color: var(--text-muted); line-height: 1.7; }
+  .list-foot > span:first-child { flex: 1 1 320px; min-width: 280px; }
   .list-foot code { background: #f2f0ec; border-radius: 3px; padding: 1px 5px; font-size: 11.5px; }
   .edit-bar .eb-txt { flex: 1; min-width: 0; line-height: 1.7; }
   .edit-bar.auto { background: var(--success-soft); border-color: #bfe0c8; color: var(--success); }
   .edit-bar.auto .btn-edit { color: var(--success); border-color: #bfe0c8; }
   .edit-bar.auto .btn-edit:hover { border-color: var(--success); }
+  /* 绿色自动保存条里的危险按钮：压过上面的绿色文字规则，保持红底白字可读 */
+  .edit-bar.auto .btn-edit.danger { color: #fff; background: var(--danger); border-color: var(--danger); }
+  .edit-bar.auto .btn-edit.danger:hover { background: #9e2222; border-color: #9e2222; }
   .base-copy-note { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
 
 </style>
@@ -746,7 +809,7 @@ const MOD_DP = {
   name: "决策速度",
   chapter: "第七章",
   src: "《对赌（实践版）》第七章 · 时间与准确性的权衡",
-  desc: "沿“快速决策指南”分支树逐题判断：这个决策该快还是该慢。",
+  desc: "源自第七章「快速决策指南」。沿分支树逐题判断这个决策该快还是该慢：结果对幸福感影响有多大、是否可逆、放弃的代价高不高。影响力有限、可逆、可重复的决策不值得反复纠结——快速决定，把时间省下来。只有真正重要又难以回头的决策，才值得进入后面的慢流程。",
   color: "#1a56db",
   reportName: "快速决策指南报告",
   titleKey: "title",
@@ -989,7 +1052,7 @@ const MOD_SS = {
   name: "六步决策",
   chapter: "第四章",
   src: "《对赌（实践版）》第四章 · 六步决策法",
-  desc: "列候选、排结果、估概率、组内比较，把“拍脑袋”变成有根据的估算。",
+  desc: "源自第四章六步决策法。把「拍脑袋」拆成六步：列出候选决策、逐一想象可能结果、估计每个结果的概率、组内比较，最后跨候选做出最终选择。它不改变你的直觉，而是让直觉接受概率的检验。值得慢下来的决策，就在这里慢下来。",
   color: "#b85415",
   reportName: "六步决策规划报告",
   titleKey: "bg",
@@ -1192,7 +1255,7 @@ const MOD_PV = {
   name: "内外视角",
   chapter: "第六章",
   src: "《对赌（实践版）》第六章 · 内视角与外视角",
-  desc: "用长期保存的“判断基准”识别内外视角，外视角校准内视角盲点。",
+  desc: "源自第六章内视角与外视角。内视角只盯着自己的处境，总觉得「这次不一样」；外视角退一步，看同类事情的基准概率——别人遇到这种情况通常怎样。准确性存在于两者的交集。基准库里长期维护的练习与话术，会在这一步帮你识别自己的内视角盲区。",
   color: "#1a7f3f",
   reportName: "观点跟踪报告",
   titleKey: "title",
@@ -1276,7 +1339,7 @@ const MOD_PM = {
   name: "事前验尸",
   chapter: "第八章",
   src: "《对赌（实践版）》第八章 · 负向思考",
-  desc: "假想失败与成功、评估概率、做出承诺，并为坏运气买好保险。",
+  desc: "源自第八章负向思考。假想这个计划已经失败（或超额成功），倒推最可能的原因并逐个估计概率。可控的原因逐条写下预先承诺，不可控的坏运气逐条买好对冲保险——你希望这些保险永远用不上。需要修正或放弃时，还可以保留本轮记录、开启新一轮计划。",
   color: "#6d5a9e",
   reportName: "事前验尸报告",
   titleKey: "title",
@@ -1377,25 +1440,29 @@ const CN_NUM = ["一", "二", "三", "四", "五", "六"];
 
 /* ---------- 会话级配置：s0 起始步 ---------- */
 const CONF = {
-  kicker: "组合工具箱 · 基于《对赌（实践版）》· 先辅助决策，再回来复盘",
+  kicker: "基于《对赌（实践版）》 · 辅助决策 × 决策复盘",
   h1: "决策-复盘工具箱",
-  noun: "全流程记录",
-  startLabel: "开始一次「决策 → 复盘」全流程",
+  noun: "决策复盘",
   reportKicker: "决策到复盘全流程报告 · 基于《对赌（实践版）》",
   intro: [
     "同一个决策的两头接在一起：决策之前，按需组合四种辅助手段（先用「决策速度」判断该快还是该慢，值得慢的走完整「六步决策」，再用「内外视角」校准判断，最后用「事前验尸」为坏结果提前买好保险）；结果出来之后，用「幸运箱 × 决策质量 × 重建决策树」四阶段完整复盘，把实际结果放回当初的所有可能之中，分清运气与决策质量。",
-    "两个阶段共用同一份事实：决策名称、决策清单、决策前已知的信息、内外视角的观点追踪与校准——决策阶段填过的内容会自动同步到复盘的对应环节，接着写就行；同步过来的内容随时可以改，也能一键重新同步。"
+    "两个阶段共用同一份事实：决策名称、决策清单、决策前已知的信息、内外视角的观点追踪与校准——决策阶段填过的内容会自动同步到复盘的对应环节，接着写就行；同步过来的内容随时可以改，也能一键重新同步。",
+    "完整流程（在起始步可以自由勾选、排序、裁剪）："
   ]
 };
 const S0_STEP = { id: "s0", title: "起始 · 选择本次要用的工具", tag: "起始", desc: "给这次决策起个名字，勾选并排序要使用的模块。" };
 const S0_FIELDS = [
   { key: "title", label: "给这次决策起个名字（会同步为复盘的事项名称）", type: "text", placeholder: "例：要不要接受新公司的 offer" },
   { key: "sel", label: "决策阶段：勾选本次要用的模块，或直接选择默认流程（两者互斥）", type: "modpick",
-    hint: "自定义组合：点击模块卡勾选，勾选后在下方词条列表中拖动 ⠿ 调整执行顺序；选择默认流程则按固定顺序执行全部四个模块。只想复盘已经做过的决策，可以一个都不勾。" },
-  { key: "doReview", label: "复盘阶段：走完决策阶段之后接着做什么？", type: "radio", inline: true,
-    options: [["yes", "进入复盘（四个阶段走一遍）", "决策清单、决策前的已知信息、内外视角等会直接带入复盘，接着写结果即可"],
-              ["no", "本次只做决策辅助", "信息还没收齐、结果还没出来，先存下决策记录；以后可以随时回来复盘"]] }
+    hint: "自定义组合：点击模块卡勾选，勾选后在下方词条列表中拖动 ⠿ 调整执行顺序；选择默认流程则按固定顺序执行全部四个模块。保存后记录留在首页「进行中的记录」，结果出来后从那里开始复盘。" }
 ];
+/* 起始步字段按会话入口裁剪：决策复盘入口只需要起名（隐藏模块勾选） */
+function s0Fields() {
+  if (values.mode === "rv") {
+    return [{ key: "title", label: "给这次要复盘的决策起个名字", type: "text", placeholder: "例：年初跳槽去新公司这个决定" }];
+  }
+  return S0_FIELDS;
+}
 
 /* ===================================================================== */
 /* 三、复盘阶段 · 常量与配置（移植自 决策复盘工具箱）
@@ -2468,7 +2535,7 @@ const app = document.getElementById("app");
 const LS_DRAFT = "dfr_draft";
 const LS_REPORTS = "dfr_reports";
 const LS_MIGRATED2 = "dfr_migrated2";
-const LS_BASE = "dfr_baseline";  // 个人基准库：判断基准（pv）+ 四象限例子（lb）+ 后视偏差例子（kt），两阶段共用
+const LS_BASE = "dfr_baseline";  // 基准库：判断基准（pv）+ 四象限例子（lb）+ 后视偏差例子（kt），两阶段共用
 
 let view = "home";
 let cur = 0;                 // 当前在组装路径中的下标
@@ -2533,6 +2600,80 @@ function loadBaseline() {
 }
 function saveBaseline() {
   try { localStorage.setItem(LS_BASE, JSON.stringify(baseline)); } catch (e) {}
+}
+
+/* ---------- 导出 / 导入数据：跨浏览器源迁移与通用备份 ---------- */
+function exportData() {
+  const payload = {
+    app: "dfr-toolbox", appVersion: "1.0",
+    exportedAt: new Date().toLocaleString("zh-CN"),
+    reports: reports, drafts: drafts, baseline: baseline
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "决策复盘工具箱备份-" + new Date().toISOString().slice(0, 10) + ".json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+/* 合并导入：报告/草稿按 id 去重（已存在跳过），基准库仅本地为空时采用导入值 */
+function importDataFile(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(String(reader.result || ""));
+      if (!data || typeof data !== "object" ||
+          (!Array.isArray(data.reports) && !Array.isArray(data.drafts) && !data.baseline)) {
+        throw new Error("缺少 reports/drafts/baseline 字段");
+      }
+      let added = 0, skipped = 0;
+      const repIds = {};
+      reports.forEach(r => { repIds[r.id] = 1; });
+      (Array.isArray(data.reports) ? data.reports : []).forEach(r => {
+        if (!r || typeof r !== "object" || r.id == null) return;
+        if (repIds[r.id]) { skipped++; return; }
+        repIds[r.id] = 1;
+        reports.unshift(r);
+        added++;
+      });
+      let dAdded = 0, dSkipped = 0;
+      const draftIds = {};
+      drafts.forEach(d => { draftIds[d.id] = 1; });
+      (Array.isArray(data.drafts) ? data.drafts : []).forEach(d => {
+        if (!d || typeof d !== "object" || d.id == null || !d.v) return;
+        if (draftIds[d.id]) { dSkipped++; return; }
+        draftIds[d.id] = 1;
+        drafts.unshift(d);
+        dAdded++;
+      });
+      let baseNote = "";
+      if (data.baseline && typeof data.baseline === "object") {
+        const localEmpty = !baseline || !Object.keys(baseline).some(k =>
+          baseline[k] && typeof baseline[k] === "object" &&
+          Object.keys(baseline[k]).some(kk => {
+            const val = baseline[k][kk];
+            return Array.isArray(val) ? val.length > 0 : (val != null && String(val).trim() !== "");
+          }));
+        if (localEmpty) {
+          baseline = data.baseline;
+          ["pv", "lb", "kt"].forEach(k => { if (!baseline[k] || typeof baseline[k] !== "object") baseline[k] = {}; });
+          saveBaseline();
+          baseNote = "；基准库已导入";
+        }
+      }
+      persistReports();
+      persistDrafts();
+      alert("导入完成：新增 " + added + " 条报告" + (skipped ? "、跳过已存在 " + skipped + " 条" : "") +
+        "；草稿新增 " + dAdded + " 条" + (dSkipped ? "、跳过 " + dSkipped + " 条" : "") + baseNote + "。");
+      render();
+    } catch (e) {
+      alert("导入失败：文件不是有效的备份 JSON（" + (e && e.message ? e.message : e) + "）。");
+    }
+  };
+  reader.onerror = () => alert("读取文件失败。");
+  reader.readAsText(file);
 }
 
 /* 旧工具报告的导入统一由 importLegacyReports() 负责（只读旧 key，见文件末尾） */
@@ -2623,7 +2764,7 @@ function scopeStrFor(entry, roundOverride) {
 }
 function fieldsForEntry(entry, scopeVals) {
   if (entry.rv) return RV_FIELDS(entry.step.id, scopeVals || rvV()) || [];
-  if (!entry.mod) return S0_FIELDS;
+  if (!entry.mod) return s0Fields();
   return MODS[entry.mod].fields(entry.step.id, scopeVals || {}) || [];
 }
 function stepMetaFor(entry, scopeVals) {
@@ -2663,9 +2804,8 @@ function gateOk(entry) {
 function gateHint(entry) {
   if (entry.rv) return entry.step.id === "s1" ? "请先填写复盘名称" : "";
   if (!entry.mod) {
-    return String(values.title || "").trim()
-      ? "请勾选至少一个决策模块，或选择默认流程；也可以一个都不勾，直接进入复盘"
-      : "请先填写决策名称";
+    if (!String(values.title || "").trim()) return values.mode === "rv" ? "请先填写事项名称" : "请先填写决策名称";
+    return values.mode === "rv" ? "" : "请勾选至少一个决策模块，或选择默认流程";
   }
   const mod = MODS[entry.mod];
   const baseId = entry.step.base || entry.step.id;
@@ -2899,18 +3039,29 @@ function growEl(el) {
 
 /* ---------- 首页 ---------- */
 function renderHome() {
-  /* 进行中的记录：两个阶段任意位置停下都留在这里 */
-  const draftList = drafts.slice().sort((a, b) => (b.id || 0) - (a.id || 0));
+  /* 待复盘：辅助决策保存下来、还没有实质复盘内容的记录，回到「进行中的记录」区 */
+  const pendingReps = [], doneReps = [];
+  reports.forEach((r, i) => { (hasRv(r) ? doneReps : pendingReps).push({ r: r, i: i }); });
+  /* 待复盘记录对应的复盘草稿（点过「开始复盘」并中途保存）：该记录按钮变「继续复盘」，草稿不再单列 */
+  const rvDraftOf = rid => drafts.filter(d => d.e === rid && d.v && d.v.rvFocus)[0] || null;
+  const linkedDraftIds = {};
+  pendingReps.forEach(x => { const d = rvDraftOf(x.r.id); if (d) linkedDraftIds[d.id] = 1; });
+
+  /* 进行中的记录：两个来源用颜色区分——决策来源（蓝：决策中 / 待复盘）与复盘来源（青：复盘中） */
+  const draftList = drafts.filter(d => !linkedDraftIds[d.id]).sort((a, b) => (b.id || 0) - (a.id || 0));
   let draftsHtml = "";
-  if (!draftList.length) {
-    draftsHtml = '<p class="empty-hint">还没有进行中的记录。开始走流程后，每一处填写都会自动存下来，随时可以回来接着走。</p>';
-  } else {
+  if (draftList.length) {
     draftsHtml = draftList.map(d => {
-      const head = d.e ? ('报告「' + esc(d.etitle || "未命名") + '」') : esc(d.title || "未命名");
-      const tag = d.e ? "编辑报告" : "进行中";
-      return '<div class="report-item">' +
+      const isEdit = !!d.e;
+      const isRvSrc = !isEdit && d.v && (d.v.mode === "rv" || d.v.rvFocus);
+      const isDecSrc = !isEdit && !isRvSrc && d.v && d.v.mode === "dec";
+      const head = isEdit ? ('报告「' + esc(d.etitle || "未命名") + '」') : esc(d.title || "未命名");
+      const tag = isEdit ? "编辑报告" : (isRvSrc ? "复盘中" : (isDecSrc ? "决策中" : "进行中"));
+      const tagBg = isEdit ? "#a8a49e" : (isRvSrc ? RV_COLOR : (isDecSrc ? "#1a56db" : RV_COLOR));
+      const cls = isEdit ? "" : (isRvSrc ? " src-rv" : " src-dec");
+      return '<div class="report-item' + cls + '">' +
         '<div class="ri-main" data-resume="' + d.id + '">' +
-          '<div class="ri-title">' + head + '<span class="ri-tag" style="background:' + RV_COLOR + ';">' + tag + '</span></div>' +
+          '<div class="ri-title">' + head + '<span class="ri-tag" style="background:' + tagBg + ';">' + tag + '</span></div>' +
           '<div class="ri-meta">更新于 ' + esc(d.updated || "") + ' · ' + esc(progressLabel(d.v, d.c)) + '</div>' +
         '</div>' +
         '<button class="btn secondary" style="padding:6px 14px;font-size:12.5px;flex-shrink:0;" data-resume="' + d.id + '">继续</button>' +
@@ -2919,85 +3070,133 @@ function renderHome() {
     }).join("");
   }
 
+  const repTags = r => {
+    const sel = Array.isArray(r.sel) ? r.sel : [];
+    return sel.map(m => MODS[m] ? '<span class="ri-tag" style="background:' + MODS[m].color + ';">' + esc(MODS[m].name) + '</span>' : "").join("") +
+      (r.src ? '<span class="ri-tag" style="background:#a8a49e;">旧工具导入</span>' : "");
+  };
+  const pendingHtml = pendingReps.map(x => {
+    const r = x.r, i = x.i;
+    const rd = rvDraftOf(r.id);
+    return '<div class="report-item src-dec">' +
+      '<div class="ri-main" data-open="' + i + '">' +
+        '<div class="ri-title">' + esc(r.title || "未命名") +
+          '<span class="ri-tag" style="background:' + (rd ? RV_COLOR : "#1a56db") + ';">' + (rd ? "复盘中" : "待复盘") + '</span></div>' +
+        '<div class="ri-meta">' + esc(r.date) + (r.updated ? ' · 更新于 ' + esc(r.updated) : "") + ' ' + repTags(r) + '</div>' +
+      '</div>' +
+      (rd
+        ? '<button class="btn" style="padding:6px 14px;font-size:12.5px;flex-shrink:0;background:' + RV_COLOR + ';" data-resume="' + rd.id + '">继续复盘</button>'
+        : '<button class="btn" style="padding:6px 14px;font-size:12.5px;flex-shrink:0;" data-reviewrep="' + i + '">开始复盘</button>') +
+      '<button class="btn secondary" style="padding:6px 14px;font-size:12.5px;flex-shrink:0;" data-editrep="' + i + '">编辑</button>' +
+      '<button class="btn danger-ghost" data-del="' + i + '">删除</button>' +
+    '</div>';
+  }).join("");
+
   let reportsHtml = "";
-  if (reports.length === 0) {
-    reportsHtml = '<p class="empty-hint">还没有已保存的' + esc(CONF.noun) + '报告。走到最后一步点「保存并生成报告」，或在向导顶部点「存档为报告」，都会出现在这里。</p>';
+  if (!doneReps.length) {
+    reportsHtml = '<p class="empty-hint">还没有已完成的' + esc(CONF.noun) + '报告。复盘走到最后一步点「保存并生成报告」，就会出现在这里。</p>';
   } else {
-    reportsHtml = reports.map((r, i) => {
+    reportsHtml = doneReps.map(x => {
+      const r = x.r, i = x.i;
       const sel = Array.isArray(r.sel) ? r.sel : [];
-      const tags = sel.map(m => MODS[m] ? '<span class="ri-tag" style="background:' + MODS[m].color + ';">' + esc(MODS[m].name) + '</span>' : "").join("") +
-        (hasRv(r) ? '<span class="ri-tag" style="background:' + RV_COLOR + ';">复盘</span>' : "") +
-        (!hasRv(r) ? '<span class="ri-tag" style="background:' + RV_COLOR + ';">待复盘</span>' : "") +
-        (r.src ? '<span class="ri-tag" style="background:#a8a49e;">旧工具导入</span>' : "");
       const vds = sel.map(m => {
         if (!MODS[m] || !r.mods || !r.mods[m]) return "";
         const vd = MODS[m].verdict(r.mods[m]);
         return vd && vd.t ? vd.t : "";
-      }).concat(hasRv(r) ? [(rvVerdict(r.rv) || {}).t || ""] : []).filter(Boolean).join(" ｜ ");
+      }).concat([(rvVerdict(r.rv) || {}).t || ""]).filter(Boolean).join(" ｜ ");
       return '<div class="report-item">' +
         '<div class="ri-main" data-open="' + i + '">' +
           '<div class="ri-title">' + esc(r.title || "未命名") + '</div>' +
-          '<div class="ri-meta">' + esc(r.date) + (r.updated ? ' · 更新于 ' + esc(r.updated) : "") + ' ' + tags + (vds ? '<span>' + esc(vds) + '</span>' : "") + '</div>' +
+          '<div class="ri-meta">' + esc(r.date) + (r.updated ? ' · 更新于 ' + esc(r.updated) : "") + ' ' +
+            '<span class="ri-tag" style="background:' + RV_COLOR + ';">复盘</span>' + repTags(r) +
+            (vds ? '<span>' + esc(vds) + '</span>' : "") + '</div>' +
         '</div>' +
-        (!hasRv(r) ? '<button class="btn" style="padding:6px 14px;font-size:12.5px;flex-shrink:0;" data-reviewrep="' + i + '">开始复盘</button>' : "") +
         '<button class="btn secondary" style="padding:6px 14px;font-size:12.5px;flex-shrink:0;" data-editrep="' + i + '">编辑</button>' +
-        '<button class="btn danger-ghost" data-del="' + i + '">删除</button>' +
       '</div>';
     }).join("");
   }
 
-  const flowHtml =
-    '<div class="flow-grid">' + MODULE_LIST.map((m, mi) =>
-      '<div class="flow-card" style="border-top-color:' + m.color + ';">' +
-        '<h4>先 · ' + (mi + 1) + '. ' + esc(m.name) + '</h4>' +
-        '<div class="fc-src">' + esc(m.src) + '</div>' +
-        '<div class="fc-desc">' + esc(m.desc) + '</div>' +
-      '</div>').join("") + '</div>' +
-    '<div class="flow-cap">决策阶段走完（可以只勾其中几个，也可以一个都不勾），接着进入复盘阶段：</div>' +
-    '<div class="flow-grid">' + RV_PHASES.map((ph, pi) =>
-      '<div class="flow-card" style="border-top-color:' + ph.color + ';">' +
-        '<h4>后 · ' + (pi + 1) + '. ' + esc(ph.short) + '</h4>' +
-        '<div class="fc-src">' + esc(ph.name) + '</div>' +
-        '<div class="fc-desc">' + esc(RV_PHASE_DESC[pi]) + '</div>' +
-      '</div>').join("") + '</div>';
+  /* 两个入口：两个带框区块并排，框内各 2×2 田字；subgrid 共享父网格行轨道，8 卡跨框等高 */
+  const entryGrid =
+    '<div class="entry-grid">' +
+      '<div class="entry-col dec">' +
+        '<div class="ec-head"><h3>辅助决策</h3>' +
+          '<div class="ec-desc">决策之前：四个模块按需勾选、排序、组合，存为待复盘记录。</div></div>' +
+        MODULE_LIST.map(m =>
+          '<div class="flow-card" style="border-top-color:' + m.color + ';">' +
+            '<h4>' + esc(m.name) + '</h4>' +
+            '<div class="fc-src">' + esc(m.src) + '</div>' +
+            '<div class="fc-desc">' + esc(m.desc) + '</div>' +
+          '</div>').join("") +
+      '</div>' +
+      '<div class="entry-col rev">' +
+        '<div class="ec-head"><h3>决策复盘</h3>' +
+          '<div class="ec-desc">结果出来之后：四个阶段完整复盘，分清运气与决策质量。</div></div>' +
+        RV_PHASES.map((ph, pi) =>
+          '<div class="flow-card" style="border-top-color:' + ph.color + ';">' +
+            '<h4>' + esc(ph.short) + '</h4>' +
+            '<div class="fc-src">' + esc(ph.name) + '</div>' +
+            '<div class="fc-desc">' + esc(RV_PHASE_DESC[pi]) + '</div>' +
+          '</div>').join("") +
+      '</div>' +
+    '</div>';
 
   app.innerHTML =
-    '<div class="narrow">' +
+    '<div class="home-full">' +
     '<div class="hero">' +
       '<div class="kicker">' + esc(CONF.kicker) + '</div>' +
       '<h1>' + esc(CONF.h1) + '</h1>' +
       CONF.intro.map(p => '<p>' + esc(p) + '</p>').join("") +
-      '<p>完整流程（在起始步可以自由勾选、排序、裁剪）：</p>' +
-      flowHtml +
+      entryGrid +
       '<div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">' +
-        '<button class="btn" id="btn-start">' + CONF.startLabel + '</button>' +
-        '<button class="btn secondary" id="btn-baseline">个人基准库</button>' +
+        '<button class="btn" id="btn-start-dec">开始辅助决策</button>' +
+        '<button class="btn" id="btn-start-rv" style="background:' + RV_COLOR + ';">开始决策复盘</button>' +
+        '<button class="btn secondary" id="btn-baseline">基准库</button>' +
       '</div>' +
     '</div>' +
 
+    '<div class="lists-cols">' +
     '<div class="report-list">' +
-      '<h2>进行中的记录（' + draftList.length + '）</h2>' +
-      '<p class="list-note">一条记录可以走很久：两个阶段任意位置都可以停下，填写会自动存下来，点「继续」从这里接着走。走完最后一步（或在向导里点「存档为报告」）就会移到下面的报告里。</p>' +
-      draftsHtml +
+      '<h2>进行中的记录（' + (draftList.length + pendingReps.length) + '）</h2>' +
+      '<p class="list-note">没走完的记录和「辅助决策」存下的待复盘记录都在这里；结果出来后点「开始复盘」，走完就移到右边的报告里。</p>' +
+      (draftsHtml + pendingHtml
+        ? '<div class="ri-grid">' + draftsHtml + pendingHtml + '</div>'
+        : '<p class="empty-hint">还没有进行中的记录——从上面任一入口开始，填写自动保存。</p>') +
     '</div>' +
 
     '<div class="report-list">' +
-      '<h2>已完成的报告（' + reports.length + '）</h2>' +
-      reportsHtml +
+      '<h2>已完成的报告（' + doneReps.length + '）</h2>' +
+      (doneReps.length ? '<div class="ri-grid">' + reportsHtml + '</div>' : reportsHtml) +
       '<div class="list-foot">' +
-        '<span>本工具的数据都存在自己的键里（<code>dfr_</code> 开头）。标「旧工具导入」的记录是首次打开时从 辅助决策工具箱 / 决策复盘工具箱（含四个单文件工具）<b>复制</b>过来的：这里只会读旧工具的数据，任何操作——包括删除——都不会改动旧工具里的原始记录。</span>' +
-        '<button class="btn secondary" style="padding:6px 14px;font-size:12.5px;flex-shrink:0;" id="btn-reimport">从旧工具重新导入</button>' +
+        '<span>数据只存在本浏览器（<code>dfr_</code> 开头）；标「旧工具导入」的记录复制自旧工具，这里的任何操作都不影响旧工具原件。</span>' +
+        '<span style="display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;">' +
+          '<button class="btn secondary" style="padding:6px 14px;font-size:12.5px;" id="btn-reimport">从旧工具重新导入</button>' +
+          '<button class="btn secondary" style="padding:6px 14px;font-size:12.5px;" id="btn-export">导出数据</button>' +
+          '<button class="btn secondary" style="padding:6px 14px;font-size:12.5px;" id="btn-import">导入数据</button>' +
+          '<input type="file" id="import-file" accept=".json,application/json" style="display:none;">' +
+        '</span>' +
       '</div>' +
+    '</div>' +
     '</div>' +
     '</div>';
 
-  document.getElementById("btn-start").onclick = startNewSession;
+  document.getElementById("btn-start-dec").onclick = () => startNewSession("dec");
+  document.getElementById("btn-start-rv").onclick = () => startNewSession("rv");
   document.getElementById("btn-baseline").onclick = () => { baseFrom = "home"; view = "baseline"; goRender(); };
   document.getElementById("btn-reimport").onclick = () => {
     if (!confirm("从旧工具重新导入记录吗？\n\n只会读取旧工具的数据，不会改动它们；已经删除过的导入记录会被重新加回来一份。")) return;
     const n = importLegacyReports(true);
     alert(n ? ("已重新导入 " + n + " 份记录。") : "没有可导入的新记录。");
     render();
+  };
+  /* 导出 / 导入：跨浏览器源迁移与备份（file:// 与各 localhost 源的 localStorage 互不互通） */
+  document.getElementById("btn-export").onclick = exportData;
+  const importFile = document.getElementById("import-file");
+  document.getElementById("btn-import").onclick = () => importFile.click();
+  importFile.onchange = () => {
+    const f = importFile.files && importFile.files[0];
+    if (f) importDataFile(f);
+    importFile.value = "";
   };
   app.querySelectorAll("[data-resume]").forEach(el => {
     el.onclick = (e) => { e.stopPropagation(); resumeDraft(Number(el.dataset.resume)); };
@@ -3030,7 +3229,13 @@ function renderHome() {
     el.onclick = (e) => {
       e.stopPropagation();
       if (!confirm("确定删除这份报告吗？此操作不可撤销（只是本工具里的一份，旧工具里的原件不受影响）。")) return;
+      const rec = reports[Number(el.dataset.del)];
       reports.splice(Number(el.dataset.del), 1);
+      /* 关联的复盘草稿一并删除（报告没了，草稿无处附着） */
+      if (rec && drafts.some(d => d.e === rec.id)) {
+        drafts = drafts.filter(d => d.e !== rec.id);
+        persistDrafts();
+      }
       persistReports(); render();
     };
   });
@@ -3046,7 +3251,7 @@ function resetNavState() {
 }
 
 
-/* ---------- 个人基准库：两个阶段共用的长期内容（编辑即存） ---------- */
+/* ---------- 基准库：两个阶段共用的长期内容（编辑即存） ---------- */
 function renderBaseline() {
   if (!baseline.pv) baseline.pv = {};
   if (!baseline.lb) baseline.lb = {};
@@ -3116,7 +3321,7 @@ function renderBaseline() {
     '<div class="narrow">' +
     '<div class="hero">' +
       '<div class="kicker">长期保存 · 编辑即存</div>' +
-      '<h1>个人基准库</h1>' +
+      '<h1>基准库</h1>' +
       '<p>这里集中维护两件事：①「内外视角」的判断基准（基准数练习与内视角话术）——决策阶段与复盘阶段都会引用它；②「幸运箱」四象限的个人例子与后视偏差的自述例子——复盘阶段随时可查。所有修改即时保存。</p>' +
       '<p class="base-copy-note">这一份基准库是本工具自己的副本（首次打开时从旧工具复制过来）。在这里修改或清空，都不会影响 辅助决策工具箱 / 决策复盘工具箱 里原来那份。</p>' +
       '<div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;">' +
@@ -3155,7 +3360,7 @@ function renderBaseline() {
   });
 }
 
-/* ---------- 右栏「基准」页签：个人基准库只读摘要（子页签按工具出场顺序） ---------- */
+/* ---------- 右栏「基准」页签：基准库只读摘要（子页签按工具出场顺序） ---------- */
 const BASE_SUBTABS = [
   { id: "lb", name: "幸运箱" },
   { id: "kt", name: "知识追踪" },
@@ -3197,7 +3402,7 @@ function baselineSummaryCard() {
   }
 
   return '<div class="review-card">' +
-    '<div class="review-head"><h3>个人基准库 · 只读摘要</h3>' +
+    '<div class="review-head"><h3>基准库 · 只读摘要</h3>' +
       '<button type="button" class="btn-edit" id="btn-auxbase">去更新</button></div>' +
     '<div class="review-body">' + subTabs + body +
       '<div class="field-hint" style="margin-top:10px;">在「去更新」中维护，内容自动同步到复盘流程。</div>' +
@@ -3309,11 +3514,17 @@ function rvReviewJumpHtml(navItems, rightTab, entries) {
 function renderWizard() {
   /* 每次渲染都把“本次决策”同步为候选列表第 1 条（决策 1）：刷新/回退/直接跳步都不会走失 */
   syncDecisionText();
-  /* 起始步默认进入复盘（用户明确选过“只做决策”就按他的选） */
+  /* 起始步默认进入复盘（新会话入口已确定方向；这里只兜底没有 doReview 的历史草稿） */
   if (values.doReview == null) values.doReview = "yes";
   const entries = buildPath(values);
   if (cur > entries.length - 1) cur = entries.length - 1;
   if (cur < 0) cur = 0;
+  /* 复盘聚焦模式（从待复盘记录点「开始复盘」进入）：路径数据不变，
+     但顶部流程条只显示复盘阶段，且「上一步」钳制在第一个复盘步 */
+  const rvFocus = !!values.rvFocus;
+  const firstRvIdx = entries.findIndex(e => e.rv);
+  const minCur = (rvFocus && firstRvIdx >= 0) ? firstRvIdx : 0;
+  if (cur < minCur) cur = minCur;
   const entry = entries[cur];
   const inRv = !!entry.rv;
   /* 换模块时把内外视角的组页签复位到第 1 组（模块内切步骤时保留） */
@@ -3354,7 +3565,7 @@ function renderWizard() {
     return { name: "起始", color: "#999590" };
   };
   let markedDec = false, markedRv = false;
-  const phaseChips = groups.map(g => {
+  const phaseChips = groups.filter(g => !rvFocus || g.rv).map(g => {
     const gm = groupMeta(g);
     const active = cur >= g.first && cur <= g.last;
     const doneG = g.last < cur;
@@ -3372,8 +3583,10 @@ function renderWizard() {
     const i = curGroup.first + li;
     const cls = i === cur ? "active" : (i < cur ? "done" : "");
     const numTxt = i < cur ? "✓" : String(li + 1);
+    const chipTitle = (!e.mod && !e.rv && values.mode === "rv") ? "起始 · 起名"
+      : (e.rv ? e.step.title : (ssStepTitle(e, 14) || e.step.title));
     let chip = '<span class="step-chip ' + cls + '" data-goto="' + i + '">' +
-      '<span class="num">' + numTxt + '</span>' + esc(e.rv ? e.step.title : (ssStepTitle(e, 14) || e.step.title)) + '</span>';
+      '<span class="num">' + numTxt + '</span>' + esc(chipTitle) + '</span>';
     if (li < arr.length - 1) chip += '<span class="step-sep">›</span>';
     return chip;
   }).join("");
@@ -3420,10 +3633,10 @@ function renderWizard() {
     : (pvGrpNext ? "下一组：" + pvGrpNextName + " →"
       : (rvGrpNext ? "下一组：" + rvGrpNextName + " →"
         : (moreDec ? "下一个决策 →"
-          : (loopNext ? "开启新一轮 →" : (isLast ? "保存并生成报告" : "下一步 →")))));
+          : (loopNext ? "开启新一轮 →" : (isLast ? (rvInFlow(values) ? "保存并生成报告" : "保存记录") : "下一步 →")))));
   const navRow =
     '<div class="nav-row">' +
-      (cur > 0 ? '<button class="btn secondary" id="btn-prev">' + esc(prevLabel) + '</button>' : '<button class="btn secondary" id="btn-home">← 返回首页</button>') +
+      (cur > minCur ? '<button class="btn secondary" id="btn-prev">' + esc(prevLabel) + '</button>' : '<button class="btn secondary" id="btn-home">← 返回首页</button>') +
       '<span class="nav-note">' + (okGate ? "" : esc(gateHint(entry))) + '</span>' +
       '<button class="btn" id="btn-next" ' + (okGate ? "" : "disabled") + '>' + esc(nextLabel) + '</button>' +
     '</div>';
@@ -3449,25 +3662,27 @@ function renderWizard() {
           '<span class="dec-pill-txt">' + esc(rvGrpName(g, gi)) + '</span></span>'
       ).join("") + '</div>'
     : "";
+  const s0H2 = (!entry.mod && !entry.rv && values.mode === "rv") ? "起始 · 给要复盘的决策起名" : null;
   const leftCard =
     '<div class="step-card">' +
       '<div class="step-head">' +
         '<span class="tag">' + esc(modTag + roundTag) + '第 ' + (cur - curGroup.first + 1) + ' 步 · ' + esc(entry.step.tag) + '</span>' +
-        '<h2>' + esc(entry.rv ? entry.step.title : (ssStepTitle(entry) || entry.step.title)) + '</h2>' +
+        '<h2>' + esc(s0H2 || (entry.rv ? entry.step.title : (ssStepTitle(entry) || entry.step.title))) + '</h2>' +
       '</div>' +
       '<div class="step-body">' + decBar + grpBar + syncHtml + metaHtml + stepBody(entry, false, scopeStr, true) + navRow + '</div>' +
     '</div>';
 
-  /* 右栏：回顾（可翻阅并就地修改前面填过的内容） / 基准（个人基准库摘要） */
+  /* 右栏：回顾（可翻阅并就地修改前面填过的内容） / 基准（基准库摘要，辅助复盘用——决策会话不展示） */
   const navItems = [];
   if (entry.mod === "pm") for (let r = 0; r < pmRound; r++) navItems.push({ kind: "round", idx: r });
   for (let i = 0; i < cur; i++) navItems.push({ kind: "step", idx: i });
   if (navItems.length && (rightTab == null || rightTab < 0 || rightTab > navItems.length - 1)) rightTab = navItems.length - 1;
-  const tab = auxTab || (cur === 0 ? "base" : "review");
+  const noBase = values.mode === "dec";
+  const tab = noBase ? "review" : (auxTab || (cur === 0 ? "base" : "review"));
   const auxTabs =
     '<div class="aux-tabs">' +
       '<button type="button" class="aux-tab' + (tab === "review" ? " on" : "") + '" data-aux="review"><span>回顾</span></button>' +
-      '<button type="button" class="aux-tab' + (tab === "base" ? " on" : "") + '" data-aux="base"><span>基准</span></button>' +
+      (noBase ? "" : '<button type="button" class="aux-tab' + (tab === "base" ? " on" : "") + '" data-aux="base"><span>基准</span></button>') +
     '</div>';
   let auxBody = "";
   if (tab === "review") {
@@ -3578,13 +3793,17 @@ function renderWizard() {
   const draftBar =
     '<div class="edit-bar' + (isEditSession ? "" : " auto") + '">' +
       '<span class="eb-txt">' + (isEditSession
-        ? '正在编辑已保存的报告「' + esc(editingReport.title || "未命名") + '」——保存后更新这一份，不会新增。'
-        : '进度已自动保存' + (curDraft ? '（' + esc(curDraft.updated) + '）' : '') + '：两个阶段都可以随时停下，下次从首页的「进行中的记录」接着走。') + '</span>' +
+        ? (values.rvFocus
+          ? '正在复盘「' + esc(editingReport.title || "未命名") + '」——「暂存进度回首页」把进度存成草稿（报告仍待复盘），「保存更新这份报告」把复盘并入报告。'
+          : '正在编辑已保存的报告「' + esc(editingReport.title || "未命名") + '」——保存后更新这一份，不会新增。')
+        : '进度已自动保存' + (curDraft ? '（' + esc(curDraft.updated) + '）' : '') + '：随时可以停下，下次从首页的「进行中的记录」接着走。') + '</span>' +
       (isEditSession
-        ? '<button type="button" class="btn-edit" data-finishrep="1">保存更新这份报告</button>' +
-          '<button type="button" class="btn-edit" id="btn-cancel-edit">放弃编辑</button>'
+        ? (values.rvFocus ? '<button type="button" class="btn-edit" data-savehome="1">暂存进度回首页</button>' : "") +
+          '<button type="button" class="btn-edit" data-finishrep="1">保存更新这份报告</button>' +
+          '<button type="button" class="btn-edit danger" id="btn-cancel-edit">放弃编辑</button>'
         : '<button type="button" class="btn-edit" data-savehome="1">保存并回首页</button>' +
-          '<button type="button" class="btn-edit" data-finishrep="1">存档为报告</button>') +
+          '<button type="button" class="btn-edit" data-finishrep="1">' + (values.mode === "dec" ? "存入进行中" : "存档为报告") + '</button>' +
+          '<button type="button" class="btn-edit danger" id="btn-drop-draft">放弃草稿</button>') +
     '</div>';
   app.innerHTML =
     draftBar +
@@ -3596,13 +3815,24 @@ function renderWizard() {
   rvBindFieldEvents(app);
   const cancelEdit = document.getElementById("btn-cancel-edit");
   if (cancelEdit) cancelEdit.onclick = cancelEditReport;
+  const dropDraft = document.getElementById("btn-drop-draft");
+  if (dropDraft) dropDraft.onclick = () => {
+    if (!confirm("放弃这条草稿吗？已填写的内容会被删除（已完成的报告不受影响）。")) return;
+    dropCurrentDraft();
+    values = {};
+    editingReport = null;
+    resetNavState();
+    viewingReport = null;
+    view = "home";
+    goRender();
+  };
   app.querySelectorAll("[data-savehome]").forEach(el => {
     el.onclick = () => { saveDraft(); viewingReport = null; view = "home"; goRender(); };
   });
   app.querySelectorAll("[data-finishrep]").forEach(el => {
     el.onclick = () => {
       /* 中途存档：空白会话不生成空报告 */
-      if (!editingReport && !draftHasContent(values)) { alert("还没有填写内容——先写一点，再存档为报告。"); return; }
+      if (!editingReport && !draftHasContent(values)) { alert("还没有填写内容——先写一点，再" + (values.mode === "dec" ? "存入进行中" : "存档为报告") + "。"); return; }
       finishReport();
     };
   });
@@ -3661,6 +3891,8 @@ function renderWizard() {
     if (prevDec) { rvDecIdx--; saveDraft(); goRender(); return; }
     /* 换环节/换阶段：决策下标与组页签都从第 1 个重新开始；退回逐决策的步骤时落在最后一个决策上 */
     cur--; reviewEdit = -1; rightTab = null; subTab = 0; pvTab = 0; rvVtTab = 0;
+    /* 复盘聚焦模式：「上一步」不越过第一个复盘步（再往上由「返回首页」接管） */
+    if (cur < minCur) cur = minCur;
     const back = entries[cur];
     rvDecIdx = (back && back.rv && DEC_STEP_IDS.indexOf(back.step.id) >= 0) ? Math.max(0, decPairs(rvV()).length - 1) : 0;
     saveDraft(); goRender();
@@ -3687,11 +3919,11 @@ function renderWizard() {
 
 
 /* ---------- 步骤主体 ---------- */
-function stepBody(entry, locked, scopeStr, isMain, subOverride, vtOverride, decOverride) {
+function stepBody(entry, locked, scopeStr, isMain, subOverride, vtOverride, decOverride, includeWizHide) {
   if (entry.rv) return rvStepBody(entry, locked, vtOverride, decOverride);
   const scope = resolveScope(scopeStr, false);
   /* 从最初环节带入、不需重复填写的字段：向导里不展示（报告里照常收录） */
-  let fs = fieldsForEntry(entry, scope).filter(f => !f.wizHide);
+  let fs = fieldsForEntry(entry, scope).filter(f => includeWizHide || !f.wizHide);
   /* ss 决策分析页：按外层环节页签只渲染当前环节。
      主编辑区用 subTab；右侧回顾卡用 reviewSubTabs 里该页签自己记住的环节。 */
   if (entry.mod === "ss" && entry.step.base === "sd" && entry.step.di != null) {
@@ -4387,9 +4619,9 @@ function finishReport() {
 
 
 /* ---------- 编辑已保存的报告：恢复成可编辑的向导会话，保存时更新原报告 ---------- */
-/* 从旧决策工具导入、或在「只做决策」模式下保存的报告没有复盘数据：
-   编辑时默认打开复盘阶段，让这份报告能继续走完「决策 → 复盘」全流程。
-   atReview = true 时直接落在复盘第 1 步（报告页的「开始复盘」）。 */
+/* 待复盘记录（还没有实质复盘内容）点「编辑」进入决策流程的编辑（s0 + 决策模块），
+   不带上复盘阶段；已有复盘内容的报告编辑时才是完整路径。
+   atReview = true 时直接落在复盘第 1 步（报告页/待复盘记录的「开始复盘」）。 */
 function startEditReport(r, atReview) {
   if (!r) return;
   /* 当前会话先落盘（留在「进行中的记录」里），编辑报告这件事另开一条记录 */
@@ -4404,8 +4636,10 @@ function startEditReport(r, atReview) {
     flowmode: r.flowmode === "default" ? "default" : "custom",
     sel: reportSel,
     mods: JSON.parse(JSON.stringify(r.mods || {})),
-    doReview: "yes"
+    doReview: (atReview || hasRv(r)) ? "yes" : "no"
   };
+  /* 复盘聚焦：从待复盘记录点「开始复盘」进入时，顶部流程条只显示复盘阶段（路径数据不变） */
+  if (atReview) values.rvFocus = true;
   if (r.rv) values.rv = JSON.parse(JSON.stringify(r.rv));
   if (r._rvsync && typeof r._rvsync === "object") values._rvsync = JSON.parse(JSON.stringify(r._rvsync));
   editingReport = r;
@@ -4603,35 +4837,138 @@ function renderRV(f, v) {
 }
 
 
-/* ---------- 组合报告：头部徽标并列 + 按模块分章 ---------- */
+/* ---------- 组合报告：复用向导录入界面的同一套字段 UI 只读重绘 ----------
+ * 决策各模块每一步、复盘各阶段每一步都是一"页"（step-card），
+ * 宽屏下两页并排（.report-flow 两列网格），窄屏单页。
+ * 渲染前把 values 临时指向报告数据（克隆），resolveScope / rvV 等全套机制原样可用。 */
+function decStepCardHtml(m, st, si, scopeStr, scope, roundLabel) {
+  const mod = MODS[m];
+  const entry = { mod: m, step: st };
+  const card = (body, titleSuffix) => {
+    if (!String(body).trim()) return "";
+    return '<div class="step-card report-step">' +
+      '<div class="step-head"><span class="tag">' +
+        esc(mod.name + " · 第 " + (si + 1) + " 步 · " + st.tag + (roundLabel ? " · " + roundLabel : "")) + '</span>' +
+        '<h2>' + esc(stepTitleFor(m, st, scope) + (titleSuffix || "")) + '</h2></div>' +
+      '<div class="step-body">' + body + '</div></div>';
+  };
+  /* 六步决策的决策分析页：录入时一页内有三个独立环节（页签切换），报告里每环节各拆一页 */
+  if (m === "ss" && st.base === "sd" && st.di != null) {
+    return SS_PHASES.map((ph, pi) =>
+      card(stepBody(entry, true, scopeStr, false, pi, null, null, true), " · " + ph)).join("");
+  }
+  /* 内外视角：多组观点追踪时逐组拆页（录入时按组页签切换，一组一个界面） */
+  if (m === "pv") {
+    const groups = pvVtGroups(pvNorm(scope));
+    const nG = Math.max(1, groups.length);
+    const parts = [];
+    for (let gi = 0; gi < nG; gi++) {
+      pvTab = gi;
+      parts.push(card(stepBody(entry, true, scopeStr, false, null, null, true),
+        nG > 1 ? " · " + pvGroupName(groups[gi], gi) : ""));
+    }
+    pvTab = 0;
+    return parts.join("");
+  }
+  return card(stepBody(entry, true, scopeStr, false, null, null, true), "");
+}
+
 function moduleChapterHtml(m, mv, ci) {
   const mod = MODS[m];
-  const steps = moduleSteps(m, mv);
-  let sn = 0;
-  let secs = steps.map(st => {
-    const fs = (mod.fields(st.id, mv) || []).filter(f => f.type !== "note" && (!f.showIf || f.showIf(mv)));
-    const body = fs.map(f => renderRV(f, mv)).join("");
-    if (!body.trim() && mod.skipEmptySection) return "";
-    return '<div class="report-section"><h3><span class="sn">' + (++sn) + '</span>' + esc(stepTitleFor(m, st, mv)) + '</h3>' + body + '</div>';
-  }).join("");
-  /* pm 的多轮计划原样保留 */
-  if (m === "pm") {
-    const roundList = Array.isArray(mv._rounds) ? mv._rounds : [];
-    secs += roundList.map((rv0, ri) => {
-      const inner = MOD_PM.steps.map(st => {
-        const fs = (MOD_PM.fields(st.id, rv0) || []).filter(f => f.type !== "note" && f.key !== "new_round" && (!f.showIf || f.showIf(rv0)));
-        return '<div class="lr-step"><b>' + esc(stepTitleFor("pm", st, rv0)) + '</b>' + fs.map(f => renderRV(f, rv0)).join("") + '</div>';
-      }).join("");
-      return '<div class="report-section"><h3><span class="sn">↻</span>第 ' + (ri + 2) + ' 轮计划：' + esc(rv0[MOD_PM.titleKey] || "未命名") + '</h3>' + inner + '</div>';
-    }).join("");
-  }
+  let cards = "";
+  /* pm 的多轮：主作用域 = 第 1 轮，_rounds[i] = 第 i+2 轮（与向导的多轮机制一致） */
+  const roundList = (m === "pm" && Array.isArray(mv._rounds)) ? mv._rounds : [];
+  moduleSteps(m, mv).forEach((st, si) => {
+    cards += decStepCardHtml(m, st, si, "m:" + m, mv, roundList.length ? "第 1 轮" : "");
+  });
+  roundList.forEach((rv0, ri) => {
+    MOD_PM.steps.forEach((st, si) => {
+      cards += decStepCardHtml("pm", st, si, "m:pm@" + (ri + 1), rv0, "第 " + (ri + 2) + " 轮");
+    });
+  });
   /* 章末结论（各模块 conclusionKey 原样沿用；也可以是函数，如内外视角的多组结论汇总） */
   const ckl = mod.conclusionKey || "conclusion";
   const cval = typeof ckl === "function" ? ckl(mv) : mv[ckl];
   if (cval && String(cval).trim()) {
-    secs += '<div class="report-section"><div class="lesson-banner" style="margin-top:0;"><span class="lb-label">' + esc(mod.conclusionLabel || "一句话结论") + '</span>' + esc(cval) + '</div></div>';
+    cards += '<div class="step-card report-step"><div class="step-body">' +
+      '<div class="lesson-banner" style="margin-top:0;"><span class="lb-label">' + esc(mod.conclusionLabel || "一句话结论") + '</span>' + esc(cval) + '</div>' +
+      '</div></div>';
   }
-  return '<div class="report-phase"><span class="pdot" style="background:' + mod.color + ';"></span>第' + CN_NUM[ci] + '章 · ' + esc(mod.name) + '（' + esc(mod.chapter) + '）</div>' + secs;
+  if (!cards) return "";
+  return '<div class="report-phase"><span class="pdot" style="background:' + mod.color + ';"></span>第' + CN_NUM[ci] + '章 · ' + esc(mod.name) + '（' + esc(mod.chapter) + '）</div>' + cards;
+}
+
+/* 起始步页卡：决策名称 + 所选模块（modpick 只读态） */
+function s0CardHtml() {
+  const body = stepBody({ mod: null, step: S0_STEP }, true, "root", false, null, null, true);
+  if (!String(body).trim()) return "";
+  return '<div class="step-card report-step">' +
+    '<div class="step-head"><span class="tag">' + esc(S0_STEP.tag) + '</span><h2>' + esc(S0_STEP.title) + '</h2></div>' +
+    '<div class="step-body">' + body + '</div></div>';
+}
+
+/* 报告页进度：字段是否有内容（grp 字段落到组对象上判断） */
+function fieldFilled(f, sc) {
+  if (f.key == null) return false;
+  let v = sc;
+  if (f.grp) v = ((f.grp === "cal" ? sc.cal_groups : sc.vt_groups) || [])[f.gi] || {};
+  const val = v[f.key];
+  if (Array.isArray(val)) return val.length > 0;
+  if (val && typeof val === "object") return Object.values(val).some(x => x != null && String(x).trim() !== "");
+  return val != null && String(val).trim() !== "";
+}
+function modProgress(m, mv) {
+  let done = 0, total = 0;
+  moduleSteps(m, mv).forEach(st => {
+    const fs = (MODS[m].fields(st.id, mv) || []).filter(f => f.type !== "note" && (!f.showIf || f.showIf(mv)));
+    if (!fs.length) return;
+    total++;
+    if (fs.some(f => fieldFilled(f, mv))) done++;
+  });
+  return { done: done, total: total };
+}
+function rvStepDone(st, v) {
+  const keep = f => f.type !== "note" && f.type !== "dtex" && (!f.showIf || f.showIf(v));
+  const isDec = DEC_STEP_IDS.indexOf(st.id) >= 0;
+  const n = isDec ? Math.max(1, decPairs(v).length) : 1;
+  for (let di = 0; di < n; di++) {
+    const fs = (RV_FIELDS(st.id, v, isDec ? di : undefined) || []).filter(keep);
+    /* 打分字段的值在 scoreKey 上（如 quality_0），一并算内容 */
+    if (fs.some(f => fieldFilled(f, v) || (f.scoreKey && fieldFilled({ key: f.scoreKey }, v)))) return true;
+  }
+  return false;
+}
+function reportProgressHtml(r, sel, showRv) {
+  /* 左框「决策阶段」：逐模块进度 + 判定结论（速度终点 / 最终选择 / 校准状态 / 验尸决定） */
+  const modsWithData = Object.keys(r.mods || {}).filter(m => MODS[m]);
+  const leftList = sel.length ? sel : modsWithData;
+  const decRows = leftList.length ? leftList.map(m => {
+    const mod = MODS[m];
+    const mv = (r.mods || {})[m] || {};
+    const p = modProgress(m, mv);
+    const vd = mod.verdict(mv);
+    return '<div class="rp-row"><span class="pdot" style="background:' + mod.color + ';"></span>' +
+      '<b>' + esc(mod.name) + '</b><span class="rp-num">' + p.done + '/' + p.total + ' 步</span>' +
+      (vd && vd.t ? '<span class="rp-vd">' + esc(vd.t) + '</span>' : "") + '</div>';
+  }).join("") : '<div class="rp-row">（未使用辅助决策——直接复盘）</div>';
+  /* 右框「复盘阶段」：四阶段进度 + 综合判定（最终象限 / 质量分 / 校准状态） */
+  let rvRows;
+  if (showRv) {
+    rvRows = RV_PHASES.map((ph, pi) => {
+      const steps = RV_STEPS.filter(st => st.phase === pi);
+      const done = steps.filter(st => rvStepDone(st, r.rv)).length;
+      return '<div class="rp-row"><span class="pdot" style="background:' + ph.color + ';"></span>' +
+        esc(ph.name) + '<span class="rp-num">' + done + '/' + steps.length + ' 步</span></div>';
+    }).join("");
+    const vd = rvVerdict(r.rv);
+    if (vd && vd.t) rvRows += '<div class="rp-row"><span class="rp-vd">综合判定：' + esc(vd.t) + '</span></div>';
+  } else {
+    rvRows = '<div class="rp-row">还没有复盘内容——结果出来后点上方「开始复盘」，决策阶段填过的内容会自动带入。</div>';
+  }
+  return '<div class="rep-prog">' +
+    '<div class="rp-col"><h4>决策阶段</h4>' + decRows + '</div>' +
+    '<div class="rp-col"><h4>复盘阶段</h4>' + rvRows + '</div>' +
+  '</div>';
 }
 
 function renderReport() {
@@ -4639,18 +4976,31 @@ function renderReport() {
   if (!r) { view = "home"; goRender(); return; }
   const sel = Array.isArray(r.sel) ? r.sel.filter(m => MODS[m] && r.mods && r.mods[m]) : [];
   const showRv = hasRv(r);
+  /* 判定横幅只放决策模块；复盘的判定与进度在下方「复盘阶段」框里 */
   const badges = sel.map(m => {
     const vd = MODS[m].verdict(r.mods[m]);
     return '<div class="vb-item"><span class="vb-mod" style="color:' + MODS[m].color + ';">' + esc(MODS[m].name) + '</span>' +
       (vd && vd.t ? '<span class="verdict-banner ' + vd.cls + '">' + esc(vd.t) + '</span>' : "") + '</div>';
-  }).join("") +
-    (showRv ? (function () {
-      const vd = rvVerdict(r.rv);
-      return '<div class="vb-item"><span class="vb-mod" style="color:' + RV_COLOR + ';">复盘</span>' +
-        (vd && vd.t ? '<span class="verdict-banner ' + vd.cls + '">' + esc(vd.t) + '</span>' : "") + '</div>';
-    })() : "");
-  const chapters = sel.map((m, ci) => moduleChapterHtml(m, r.mods[m], ci)).join("") +
-    (showRv ? rvChapterHtml(r.rv, sel.length) : "");
+  }).join("");
+  /* 渲染期间把 values 指向报告数据的克隆：stepBody / resolveScope / rvReportSections 原样复用 */
+  const savedValues = values;
+  let body = "";
+  try {
+    values = {
+      title: String(r.title || ""),
+      flowmode: r.flowmode === "default" ? "default" : "custom",
+      sel: Array.isArray(r.sel) ? r.sel.slice() : [],
+      mods: JSON.parse(JSON.stringify(r.mods || {})),
+      rv: r.rv ? JSON.parse(JSON.stringify(r.rv)) : {}
+    };
+    const decPart = sel.length
+      ? '<div class="report-phase"><span class="pdot" style="background:#999590;"></span>起始 · 本次决策</div>' + s0CardHtml() +
+        sel.map((m, ci) => moduleChapterHtml(m, values.mods[m], ci)).join("")
+      : "";
+    body = '<div class="report-flow">' + decPart + (showRv ? rvChapterHtml(values.rv, sel.length) : "") + '</div>';
+  } finally {
+    values = savedValues;
+  }
   const concl = showRv ? String(r.rv.conclusion || "").trim() : "";
 
   app.innerHTML =
@@ -4659,22 +5009,31 @@ function renderReport() {
       '<h1>' + esc(r.title || "未命名") + '</h1>' +
       '<div class="meta">保存于 ' + esc(r.date) + (r.updated ? ' · 更新于 ' + esc(r.updated) : "") + ' · 流程：' + esc(flowText(r)) + '</div>' +
       '<div class="vb-row">' + badges + '</div>' +
-      (!showRv ? '<p class="list-note" style="margin:12px 0 0;">这份报告目前只有决策阶段。结果出来后点「开始复盘」，决策名称、决策清单、决策前已知的信息等会自动带入复盘，接着走完四个阶段即可。</p>' : "") +
       (concl ? '<div class="lesson-banner"><span class="lb-label">复盘结论</span>' + esc(concl) + '</div>' : "") +
+      reportProgressHtml(r, sel, showRv) +
       '<div class="actions-row">' +
         (!showRv ? '<button class="btn" id="btn-start-review">开始复盘</button>' : "") +
         '<button class="btn secondary" id="btn-edit-report">' + (showRv ? "编辑此报告" : "编辑决策记录") + '</button>' +
         '<button class="btn secondary" id="btn-copy">复制为文字</button>' +
         '<button class="btn secondary" id="btn-print">打印 / 导出 PDF</button>' +
+        '<button class="btn danger" id="btn-del-report">删除此报告</button>' +
         '<button class="btn secondary" id="btn-back">← 返回首页</button>' +
       '</div>' +
-    '</div>' + chapters +
+    '</div>' + body +
     '<div class="actions-row no-print"><button class="btn secondary" id="btn-back2">← 返回首页</button></div>';
 
   document.getElementById("btn-back").onclick = backHome;
   document.getElementById("btn-back2").onclick = backHome;
   document.getElementById("btn-print").onclick = () => window.print();
   document.getElementById("btn-edit-report").onclick = () => startEditReport(r);
+  document.getElementById("btn-del-report").onclick = () => {
+    if (!confirm("确定删除这份报告吗？此操作不可撤销（只是本工具里的一份，旧工具里的原件不受影响）。")) return;
+    const idx = reports.indexOf(r);
+    if (idx >= 0) { reports.splice(idx, 1); persistReports(); }
+    /* 关联的复盘草稿一并删除 */
+    if (drafts.some(d => d.e === r.id)) { drafts = drafts.filter(d => d.e !== r.id); persistDrafts(); }
+    backHome();
+  };
   const startReviewBtn = document.getElementById("btn-start-review");
   if (startReviewBtn) startReviewBtn.onclick = () => startEditReport(r, true);
   document.getElementById("btn-copy").onclick = () => {
@@ -5020,20 +5379,21 @@ function flashCopied() {
 }
 
 /* =====================================================================
- * 全流程：把「辅助决策」与「决策复盘」串成一条会话
- *   一条会话 = 起始步（决策名 + 勾选决策模块 + 是否进入复盘）
- *            + 决策阶段（dp → ss → pv → pm，按勾选顺序）
- *            + 复盘阶段（幸运箱 → 决策质量 → 重建决策树 → 再判断）
+ * 一个工具，两个平行入口：「辅助决策」与「决策复盘」在时间上分离
+ *   辅助决策会话 = 起始步（决策名 + 勾选决策模块）+ 决策阶段（dp → ss → pv → pm，按勾选顺序）
+ *   决策复盘会话 = 起始步（只起名）+ 复盘阶段（幸运箱 → 决策质量 → 重建决策树 → 再判断，12 步）
+ *   从待复盘记录开始复盘 = 复盘聚焦会话：路径保留决策阶段（供右栏回顾/编辑与自动同步），
+ *   顶部流程条只显示复盘阶段。决策与复盘保存后合并为同一份报告。
  *   两阶段共用一份事实：names / 决策清单 / 决策前的已知信息 / 内外视角，
  *   决策阶段填过的内容自动同步到复盘对应环节（只填空，随时可改，可重新同步）。
  * ===================================================================== */
 
 const RV_COLOR = "#0e7490";
 const RV_PHASE_DESC = [
-  "幸运箱 · 初步判断：客观记录决策与实际结果，点选这件事的初步象限。",
-  "决策质量判断：知识流程重建所知、后视偏差检验、内外视角与校准。",
-  "运气判断：重建决策树、逐决策打分归因，把实际结果放回所有可能之中。",
-  "再判断与总结：最终象限二选一，8 个改进问题自查，写下本次复盘的一句话结论。"
+  "客观记录当时的决策与实际发生了什么，给出结果好坏的第一判断，并在幸运箱四象限里点选初步位置。好结果不等于好决策，坏结果也不等于坏决策——先把这两件事分开，后面的分析才不会跑偏。",
+  "只凭当时掌握的信息评判决策质量：按「决策前所知 → 决策 → 结果 → 事后才知」重建知识流程，逐条检验「我早就知道」是不是后视偏差，再把内外视角对照校准。结果不能倒灌记忆，这一步就是防波堤。",
+  "把实际结果放回当初的所有可能之中：为每个决策重建决策树，补齐当时同样可能发生的潜在结果与概率，逐决策打分、勾选更好的反事实、回答「重来一次会怎样」，最后归因——这次结果里，运气与实力各占多少。",
+  "回看初步象限，在结果相同的另一个象限之间做最终二选一；再用书中的 8 个改进问题逐条自查——好结果警惕自满，坏结果警惕全盘自我否定。最后写下这次复盘最想带走的一句话结论。"
 ];
 
 let rvDecIdx = 0;      // 复盘阶段「当前第几个决策」（决策切换器）
@@ -5055,8 +5415,26 @@ function rvInFlow(o) {
   if (o.doReview === "yes") return true;
   return hasRv(o);   /* 旧数据没有这个字段：按有没有复盘内容判断 */
 }
+/* 判断一份报告是否已有「实质复盘内容」：rv 存在且至少有一个关键字段非空。
+   不能只看 rv 键是否存在——开始复盘 / 决策→复盘同步都会先建出 rv 骨架
+   （事项名称 title 是自动同步的，不算实质内容）。 */
 function hasRv(r) {
-  return !!(r && r.rv && typeof r.rv === "object" && Object.keys(r.rv).length);
+  const rv = r && r.rv;
+  if (!rv || typeof rv !== "object") return false;
+  const nz = x => x != null && String(x).trim() !== "";
+  const rowHas = row => Object.keys(row || {}).some(k => {
+    const val = row[k];
+    if (Array.isArray(val)) return val.some(y => (y && typeof y === "object") ? rowHas(y) : nz(y));
+    if (val && typeof val === "object") return rowHas(val);
+    return nz(val);
+  });
+  return Object.keys(rv).some(k => {
+    if (k === "title" || k.charAt(0) === "_") return false;
+    const val = rv[k];
+    if (Array.isArray(val)) return val.some(row => (row && typeof row === "object") ? rowHas(row) : nz(row));
+    if (val && typeof val === "object") return rowHas(val);
+    return nz(val);
+  });
 }
 /* 观点追踪组名（与复盘工具箱同一口径） */
 function rvGrpName(g, i) {
@@ -5279,21 +5657,34 @@ function rvReportSectionsHtml(v) {
     const stepsHtml = RV_STEPS.map((st, si) => ({ st: st, si: si })).filter(x => x.st.phase === pi).map(x => {
       const keep = f => f.type !== "note" && f.type !== "dtex";
       const isDec = DEC_STEP_IDS.indexOf(x.st.id) >= 0;
+      const isView = x.st.id === "s8" || x.st.id === "s9";
       const nDec = isDec ? decPairs(v).length : 0;
-      const cards = nDec > 1
-        ? decPairs(v).map((p, di) => ({ di: di, fs: RV_FIELDS(x.st.id, v, di).filter(keep) }))
-        : [{ di: null, fs: RV_FIELDS(x.st.id, v).filter(keep) }];
-      const valid = cards.filter(c => c.fs.some(f => !f.showIf || f.showIf(v)) || c.di != null);
+      let cards;
+      if (isDec && nDec > 1) {
+        /* 逐决策的步骤：一张卡一个决策 */
+        cards = decPairs(v).map((p, di) => ({ di: di, gi: null, fs: RV_FIELDS(x.st.id, v, di).filter(keep) }));
+      } else if (isView) {
+        /* 内外视角 / 视角校准：多组观点追踪时一张卡一组（录入时按组页签切换） */
+        rvViewNorm(v);
+        const groups = Array.isArray(v.vt) ? v.vt : [];
+        cards = groups.length > 1
+          ? groups.map((g, gi) => ({ di: null, gi: gi, gname: rvGrpName(g, gi), fs: RV_FIELDS(x.st.id, v).filter(keep) }))
+          : [{ di: null, gi: null, fs: RV_FIELDS(x.st.id, v).filter(keep) }];
+      } else {
+        cards = [{ di: null, gi: null, fs: RV_FIELDS(x.st.id, v).filter(keep) }];
+      }
+      const valid = cards.filter(c => c.fs.some(f => !f.showIf || f.showIf(v)) || c.di != null || c.gi != null);
       if (!valid.length) return "";
       return valid.map(c =>
         '<div class="step-card report-step">' +
           '<div class="step-head">' +
             '<span class="tag">第 ' + (x.si + 1) + ' 步 · ' + esc(x.st.tag) + '</span>' +
             '<h2>' + esc(x.st.title) +
-              (c.di == null ? "" : '<span class="dec-chip">决策 ' + (c.di + 1) + ' / ' + nDec + '</span>') +
+              (c.di != null ? '<span class="dec-chip">决策 ' + (c.di + 1) + ' / ' + nDec + '</span>' : "") +
+              (c.gi != null ? '<span class="dec-chip">' + esc(c.gname) + '</span>' : "") +
             '</h2>' +
           '</div>' +
-          '<div class="step-body">' + rvRenderFields(c.fs, true, null) + '</div>' +
+          '<div class="step-body">' + rvRenderFields(c.fs, true, c.gi) + '</div>' +
         '</div>').join("");
     }).join("");
     if (stepsHtml) sections += '<div class="report-phase"><span class="pdot" style="background:' + ph.color + ';"></span>' + esc(ph.name) + '</div>' + stepsHtml;
@@ -5305,12 +5696,12 @@ function rvChapterHtml(rvv, ci) {
   const body = rvReportSections(rvv);
   if (!body) return "";
   const vd = rvVerdict(rvv);
+  /* 外层 report-flow 网格由 renderReport 统一提供，这里只出章标题与页卡 */
   return '<div class="report-phase"><span class="pdot" style="background:' + RV_COLOR + ';"></span>第' + CN_NUM[ci] + '章 · 复盘' +
-    (vd && vd.t ? ' · ' + esc(vd.t) : "") + '</div>' +
-    '<div class="report-flow">' + body + '</div>';
+    (vd && vd.t ? ' · ' + esc(vd.t) : "") + '</div>' + body;
 }
 
-/* ---------- 个人基准库（决策阶段与复盘阶段共用一份） ---------- */
+/* ---------- 基准库（决策阶段与复盘阶段共用一份） ---------- */
 function migrateBaselineNow() {
   let has = null;
   try { has = localStorage.getItem(LS_BASE); } catch (e) { return; }
@@ -5466,7 +5857,8 @@ function progressLabel(v, c) {
   const where = e.rv
     ? ("复盘阶段 · " + RV_PHASES[e.step.phase].short)
     : (e.mod ? ("决策阶段 · " + MODS[e.mod].name) : "起始步");
-  return where + " · 第 " + (sameKey.indexOf(i) + 1) + "/" + sameKey.length + " 步「" + e.step.title + "」" +
+  const stepTitle = (!e.rv && !e.mod && v && v.mode === "rv") ? "起始 · 起名" : e.step.title;
+  return where + " · 第 " + (sameKey.indexOf(i) + 1) + "/" + sameKey.length + " 步「" + stepTitle + "」" +
     "（全流程 " + (i + 1) + "/" + entries.length + "）";
 }
 /* saveDraft 的落点：新增或更新当前这条「进行中的记录」 */
@@ -5510,10 +5902,13 @@ function resumeDraft(id) {
   goRender();
 }
 /* 开始一次新会话（旧会话若已有内容，仍留在「进行中的记录」里） */
-function startNewSession() {
+/* 开始一次新会话（旧会话若已有内容，仍留在「进行中的记录」里）
+   kind = "dec"：辅助决策入口——s0 起名 + 勾选模块，路径只有决策模块，保存后待复盘
+   kind = "rv" ：决策复盘入口——s0 只起名，直接走复盘 12 步 */
+function startNewSession(kind) {
   resetNavState();
   DRAFT_ID = null;
-  values = {};
+  values = { mode: kind === "rv" ? "rv" : "dec", doReview: kind === "rv" ? "yes" : "no" };
   editingReport = null;
   saveDraft();
   view = "wizard";
